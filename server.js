@@ -7,6 +7,7 @@ const app = express();
 
 //import routes
 const studentRoutes = require('./routes/students')
+const teaherRoutes = require('./routes/teacher')
 
 
 //app middleware
@@ -14,11 +15,12 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //route middleware
-app.use(studentRoutes); 
+app.use(studentRoutes);
+app.use(teaherRoutes) 
 
 
 const PORT = 8000;
-const DB_URL = 'mongodb+srv://brighthouse:itpm@student.d7mh7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
+const DB_URL = ''
 
 mongoose.connect(DB_URL,{
     useNewUrlParser: true,
