@@ -7,7 +7,8 @@ const app = express();
 
 //import routes
 const studentRoutes = require('./routes/students')
-const teaherRoutes = require('./routes/teacher')
+const teacherRoutes = require('./routes/teacher')
+const staffRoutes = require('./routes/staffs')
 
 
 //app middleware
@@ -16,7 +17,8 @@ app.use(cors());
 
 //route middleware
 app.use(studentRoutes);
-app.use(teaherRoutes) 
+app.use(teacherRoutes);
+app.use(staffRoutes);
 
 
 const PORT = 8000;

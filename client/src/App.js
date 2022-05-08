@@ -13,6 +13,12 @@ import TeacherDetails from './components/TeacherDetails';
 import GenerateReportTeacher from './components/GererateReportTeacher';
 import EditTeacher from './components/EditTeacher';
 
+import AllStaffs from './components/AllStaffs';
+import CreateStaff from './components/CreateStaff';
+import StaffDetails from './components/StaffDetails';
+import GenerateReportStaff from './components/GenerateReportStaff'
+import EditStaff from './components/EditStaff';
+
 export default class App extends Component{
   render(){
     return(
@@ -30,6 +36,12 @@ export default class App extends Component{
         <Route path="/teacher/:id" component={TeacherDetails}></Route>
         <Route path="/teacherreport" component={GenerateReportTeacher}></Route>
         <Route path="/edit/:id" component={EditTeacher}></Route>
+
+        <Route path="/staff" component={AllStaffs}></Route>
+        <Route path="/staff/save"  component={CreateStaff}></Route>
+        <Route path="/staff/:id" component={StaffDetails}></Route>
+        <Route path="/staffreport" component={GenerateReportStaff}></Route>
+        <Route path="/edit/:id" component={EditStaff}></Route>
 
       </div>
 
