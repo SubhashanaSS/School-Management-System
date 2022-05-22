@@ -1,6 +1,6 @@
 import React from "react";
 import ReactToPrint from "react-to-print";
-//student report
+//course report
 import axios from 'axios';
 
 const thStyle = {
@@ -9,28 +9,28 @@ const thStyle = {
   fontStyle: "normal"
 };
 
-class GenerateReportStudent extends React.Component {
+class GenerateReportCourse extends React.Component {
 
   constructor(props){
     super(props);
 
     this.state={
-      students:[]
+      courses:[]
     };
 
   }
   componentDidMount(){
-    this.retrieveStudents();
+    this.retrieveCourses();
   }
 
-  retrieveStudents(){
-    axios.get("http://localhost:8000/students").then(res =>{
+  retrieveCourses(){
+    axios.get("http://localhost:8000/courses").then(res =>{
       if(res.data.success){
         this.setState({
-          students:res.data.existingStudents
+          courses:res.data.existingCourses
         });
       
-        console.log(this.state.students)
+        console.log(this.state.courses)
       }
   
       
@@ -38,19 +38,19 @@ class GenerateReportStudent extends React.Component {
   }
 
   
-  filterData(students,searchKey){
-    const result = students.filter((student) =>
-    student.name.toLowerCase().includes(searchKey)
+  filterData(courses,searchKey){
+    const result = students.filter((course) =>
+    course.name.toLowerCase().includes(searchKey)
     )
-    this.setState({students:result})
+    this.setState({courses:result})
   }
 
   handleSearchArea = (e) =>{
     const searchKey=e.currentTarget.value;
 
-    axios.get("http://localhost:8000/students").then(res =>{
+    axios.get("http://localhost:8000/courses").then(res =>{
       if(res.data.success){
-        this.filterData(res.data.existingStudents, searchKey)
+        this.filterData(res.data.existingCourses, searchKey)
   
       }
     })
@@ -62,7 +62,7 @@ class GenerateReportStudent extends React.Component {
           <div className="row">
           <div className="col-lg-9 mt-2 mb-2">
             <br></br><br></br>
-            <h4>All Students Report</h4>
+            <h4>All courses Report</h4>
           </div>
           <div className="col-lg-3 mt-2 mb-2">
             <input
@@ -77,18 +77,13 @@ class GenerateReportStudent extends React.Component {
         
         <table className="table table-hover" style={{marginTop:'40px',background:'LightGray'}}>
           <thead>
-            <tr>
+          <tr>
               <th scope="col">#</th>
-              <th scope="col">Full Name</th>
-              <th scope="col">Address</th>
-              <th scope="col">DOB</th>
-              <th scope="col">Gender</th>
-              <th scope="col">StudentID</th>
-              <th scope="col">Grade</th>
-              <th scope="col">Contact No</th>
-              <th scope="col">Student Email</th>
-              <th scope="col">Guardian Name</th>
-              <th scope="col">Guardian ContactNo</th>
+              <th scope="col">courseid</th>
+              <th scope="col">coursename</th>
+              <th scope="col">tic</th>
+              <th scope="col">coursegpa</th>
+              <th scope="col">course Duration</th>
             </tr>
           </thead>
 
@@ -96,16 +91,11 @@ class GenerateReportStudent extends React.Component {
             {this.state.students.map((students,index) =>(
               <tr key={index}>
                 <th scope="row">{index+1}</th>
-                <td>{students.name}</td>
-                <td>{students.address}</td>
-                <td>{students.dob}</td>
-                <td>{students.gender}</td>
-                <td>{students.studentid}</td>
-                <td>{students.grade}</td>
-                <td>{students.contactno}</td>
-                <td>{students.stdemail}</td>
-                <td>{students.gdnname}</td>
-                <td>{students.gdncontactno}</td>
+                <td>{courses.courseid}</td>
+                <td>{courses.coursename}</td>
+                <td>{courses.tic}</td>
+                <td>{courses.coursegpa}</td>
+                <td>{courses.courseduration}</td>
                 
               </tr>
             ))}
@@ -117,7 +107,7 @@ class GenerateReportStudent extends React.Component {
         <br></br>
         <br></br>
 
-        <h5 style={{color:"red"}}>Total Number of Students : {this.state.students.length}</h5>
+        <h5 style={{color:"red"}}>Total Number of courses : {this.state.courses.length}</h5>
         
     </div>
     );
@@ -134,7 +124,7 @@ class Example extends React.Component {
           trigger={() => <button style={{background:'#d0d1a3'}}>Print Report</button>}
           content={() => this.componentRef}
         />
-        <GenerateReportStudent ref={(el) => (this.componentRef = el)} />
+        <GenerateReportCourse ref={(el) => (this.componentRef = el)} />
       </div>
     );
   }
